@@ -1,3 +1,16 @@
-Google-Places-Search-iOS-5
+# Google-Places-Search-iOS-5
 
-This library utilizes the Google Places API in a sample iOS app.  It has been derived from the following repository. https://github.com/vvanhee/Google-Local-Search-iOS
+This library utilizes the Google Places API(http://code.google.com/apis/maps/documentation/places/) in a sample iOS app.  
+
+It has been derived from the following repository (https://github.com/vvanhee/Google-Local-Search-iOS)
+
+# Summary
+
+Application will determine location.  Issue Google Places API request containing the LAT and LNG and TYPES (types are configurable) and will return JSON results into an object to display in UITableView.
+
+UISearchBar is also configured to issue free text search.
+
+# Usage
+Add CoreLocation and MapKit Frameworks.
+Add Google classes
+Have a blast.
