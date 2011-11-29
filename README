@@ -11,6 +11,7 @@ Application will determine location.  Issue Google Places API request containing
 UISearchBar is also configured to issue free text search.
 
 A more detailed tutorial is at my site -> http://drew5.net/2011/11/28/google-places-for-ios-5-sdk/
+
 # Usage
 Add CoreLocation and MapKit Frameworks.
 Add Google classes
