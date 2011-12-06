@@ -16,7 +16,7 @@
 // limitations under the License.
 
 #import <Foundation/Foundation.h>
-#import "SBJson.h"
+#import "../SBJSON/SBJson.h"
 #import "GooglePlacesObject.h"
 
 @protocol GooglePlacesConnectionDelegate;

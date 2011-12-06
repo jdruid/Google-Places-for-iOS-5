@@ -13,7 +13,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4EF5605C148412440099D25C"
+               BlueprintIdentifier = "4E18405B148E5B1A0066556A"
                BuildableName = "GoogleLocations.app"
                BlueprintName = "GoogleLocations"
                ReferencedContainer = "container:GoogleLocations.xcodeproj">
@@ -31,7 +31,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF5605C148412440099D25C"
+            BlueprintIdentifier = "4E18405B148E5B1A0066556A"
             BuildableName = "GoogleLocations.app"
             BlueprintName = "GoogleLocations"
             ReferencedContainer = "container:GoogleLocations.xcodeproj">
@@ -49,7 +49,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF5605C148412440099D25C"
+            BlueprintIdentifier = "4E18405B148E5B1A0066556A"
             BuildableName = "GoogleLocations.app"
             BlueprintName = "GoogleLocations"
             ReferencedContainer = "container:GoogleLocations.xcodeproj">
@@ -67,7 +67,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EF5605C148412440099D25C"
+            BlueprintIdentifier = "4E18405B148E5B1A0066556A"
             BuildableName = "GoogleLocations.app"
             BlueprintName = "GoogleLocations"
             ReferencedContainer = "container:GoogleLocations.xcodeproj">

@@ -1,35 +1,23 @@
 //
 //  AppDelegate.m
-// 
-// Copyright 2011 Joshua Drew
-// 
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// 
-// http://www.apache.org/licenses/LICENSE-2.0
-// 
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+//  GoogleLocations
+//
+//  Created by Joshua Drew on 12/6/11.
+//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//
 
 #import "AppDelegate.h"
-#import "RootViewController.h"
 
 @implementation AppDelegate
 
-@synthesize window;
-@synthesize viewController;
+@synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [window addSubview:[viewController view]];
-    [window makeKeyAndVisible];
+    // Override point for customization after application launch.
     return YES;
 }
-
+							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     /*

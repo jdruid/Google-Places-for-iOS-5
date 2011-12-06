@@ -16,7 +16,7 @@
 // limitations under the License.
 
 #import "GooglePlacesConnection.h"
-#import "GTMNSString+URLArguments.h"
+#import "../GTM/GTMNSString+URLArguments.h"
 
 @implementation GooglePlacesConnection
 
@@ -80,8 +80,8 @@
     
     types = [types gtm_stringByEscapingForURLArgument];
     
-    NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=500&types=%@&sensor=true&key=AIzaSyAtlc8kJXW6aGvU5VWboKOoqj3xOM9w0R0",
-                                    centerLat, centerLng, types];
+    NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=500&types=%@&sensor=true&key=%@",
+                                    centerLat, centerLng, types, kGOOGLE_API_KEY];
     
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
