@@ -71,13 +71,17 @@ formattedPhoneNumber:(NSString *)fPhone
 
 -(id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms
 {
+    
+    NSDictionary *geo = [jsonResultDict objectForKey:@"geometry"];
+    NSDictionary *loc = [geo objectForKey:@"location"];
+    
 	return [self initWithName:[jsonResultDict objectForKey:@"name"] 
-              latitude:[[jsonResultDict objectForKey:@"lt"] doubleValue] 
-             longitude:[[jsonResultDict objectForKey:@"lg"] doubleValue]
+              latitude:[[loc objectForKey:@"lat"] doubleValue] 
+             longitude:[[loc objectForKey:@"lng"] doubleValue]
              placeIcon:[jsonResultDict objectForKey:@"icon"] 
                 rating:[jsonResultDict objectForKey:@"rating"]
               vicinity:[jsonResultDict objectForKey:@"vicinity"]
-                  type:[jsonResultDict objectForKey:@"type"]
+                  type:[jsonResultDict objectForKey:@"types"]
              reference:[jsonResultDict objectForKey:@"reference"]
                    url:[jsonResultDict objectForKey:@"url"]
      addressComponents:[jsonResultDict objectForKey:@"address_components"]
