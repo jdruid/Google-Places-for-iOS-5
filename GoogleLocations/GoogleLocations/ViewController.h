@@ -18,14 +18,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "GooglePlacesConnection.h"
+#import "PullToRefreshTableViewController.h"
 
 @class GooglePlacesObject;
 
-@interface ViewController : UIViewController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, GooglePlacesConnectionDelegate, CLLocationManagerDelegate>
-{
-    IBOutlet UITableView    *tableView;
-    IBOutlet UISearchBar    *searchBar;
-    
+@interface ViewController : PullToRefreshTableViewController <UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, GooglePlacesConnectionDelegate, CLLocationManagerDelegate>
+{   
     CLLocationManager       *locationManager;
     CLLocation              *currentLocation;
     

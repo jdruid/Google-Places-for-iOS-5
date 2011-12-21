@@ -20,6 +20,7 @@
 #import "SBJson.h"
 #import "GTMNSString+URLArguments.h"
 #import "GooglePlacesObject.h"
+#import "DetailViewController.h"
 
 @implementation ViewController
 
@@ -42,6 +43,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [self.refreshHeaderView setLastRefreshDate:nil];    
     
     responseData = [[NSMutableData data] init];
     
@@ -146,6 +149,23 @@
 }
 
 #pragma mark -
+#pragma mark PullToRefresh
+- (void)reloadTableViewDataSource
+{
+    [self setResultsLoaded:NO];
+    
+    [[self locationManager] startUpdatingLocation];
+    
+	[super performSelector:@selector(dataSourceDidFinishLoadingNewData) withObject:nil afterDelay:3.0];
+}
+
+- (void)dataSourceDidFinishLoadingNewData
+{
+    [refreshHeaderView setCurrentDate];  //  should check if data reload was successful 
+    [super dataSourceDidFinishLoadingNewData];
+}
+
+#pragma mark -
 #pragma mark Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView
 {
@@ -184,14 +204,22 @@
     cell.detailTextLabel.text                   = place.vicinity;
     cell.detailTextLabel.textColor              = [UIColor darkGrayColor];
     cell.detailTextLabel.font                   = [UIFont systemFontOfSize:10.0];
-    
+
     return cell;
 }
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{    
-//    
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"ShowPlaceDetail"]) 
+    {        
+        NSIndexPath *selectedRowIndex = [self.tableView indexPathForSelectedRow];
+        GooglePlacesObject *places = [locations objectAtIndex:selectedRowIndex.row];
+        
+        DetailViewController *detailViewController = [segue destinationViewController];
+        detailViewController.reference =  places.reference;     
+    }
+}
+
 
 #pragma mark -
 #pragma mark Location manager
