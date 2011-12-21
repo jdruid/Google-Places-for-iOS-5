@@ -32,6 +32,14 @@
 		4E1840B0148E5C120066556A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1840A4148E5C120066556A /* SBJsonWriter.m */; };
 		4E1840B2148E5C500066556A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1840B1148E5C500066556A /* CoreLocation.framework */; };
 		4E1840B4148E5C5B0066556A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1840B3148E5C5B0066556A /* MapKit.framework */; };
+		4E9CE13714A22E09007BDDAC /* PullToRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9CE13414A22E09007BDDAC /* PullToRefreshTableViewController.m */; };
+		4E9CE13814A22E09007BDDAC /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9CE13614A22E09007BDDAC /* EGORefreshTableHeaderView.m */; };
+		4E9CE13E14A22E3F007BDDAC /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9CE13A14A22E3F007BDDAC /* blackArrow.png */; };
+		4E9CE13F14A22E3F007BDDAC /* blueArrow_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9CE13B14A22E3F007BDDAC /* blueArrow_new.png */; };
+		4E9CE14014A22E3F007BDDAC /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9CE13C14A22E3F007BDDAC /* blueArrow.png */; };
+		4E9CE14114A22E3F007BDDAC /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E9CE13D14A22E3F007BDDAC /* whiteArrow.png */; };
+		4E9CE14314A22F5E007BDDAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9CE14214A22F5E007BDDAC /* QuartzCore.framework */; };
+		4E9CE14614A23013007BDDAC /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9CE14514A23013007BDDAC /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +91,17 @@
 		4E1840A4148E5C120066556A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		4E1840B1148E5C500066556A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4E1840B3148E5C5B0066556A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4E9CE13314A22E09007BDDAC /* PullToRefreshTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshTableViewController.h; sourceTree = "<group>"; };
+		4E9CE13414A22E09007BDDAC /* PullToRefreshTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshTableViewController.m; sourceTree = "<group>"; };
+		4E9CE13514A22E09007BDDAC /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		4E9CE13614A22E09007BDDAC /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		4E9CE13A14A22E3F007BDDAC /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		4E9CE13B14A22E3F007BDDAC /* blueArrow_new.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow_new.png; sourceTree = "<group>"; };
+		4E9CE13C14A22E3F007BDDAC /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		4E9CE13D14A22E3F007BDDAC /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		4E9CE14214A22F5E007BDDAC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4E9CE14414A23013007BDDAC /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		4E9CE14514A23013007BDDAC /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E9CE14314A22F5E007BDDAC /* QuartzCore.framework in Frameworks */,
 				4E1840B4148E5C5B0066556A /* MapKit.framework in Frameworks */,
 				4E1840B2148E5C500066556A /* CoreLocation.framework in Frameworks */,
 				4E184061148E5B1A0066556A /* UIKit.framework in Frameworks */,
@@ -104,6 +124,7 @@
 		4E184051148E5B1A0066556A = {
 			isa = PBXGroup;
 			children = (
+				4E9CE14214A22F5E007BDDAC /* QuartzCore.framework */,
 				4E1840B3148E5C5B0066556A /* MapKit.framework */,
 				4E1840B1148E5C500066556A /* CoreLocation.framework */,
 				4E184066148E5B1A0066556A /* GoogleLocations */,
@@ -133,6 +154,7 @@
 		4E184066148E5B1A0066556A /* GoogleLocations */ = {
 			isa = PBXGroup;
 			children = (
+				4E9CE13114A22DF4007BDDAC /* Controls */,
 				4E18408B148E5C120066556A /* SBJSON */,
 				4E184084148E5C020066556A /* GooglePlaces */,
 				4E18407E148E5BEE0066556A /* GTM */,
@@ -142,6 +164,8 @@
 				4E184075148E5B1A0066556A /* ViewController.h */,
 				4E184076148E5B1A0066556A /* ViewController.m */,
 				4E184067148E5B1A0066556A /* Supporting Files */,
+				4E9CE14414A23013007BDDAC /* DetailViewController.h */,
+				4E9CE14514A23013007BDDAC /* DetailViewController.m */,
 			);
 			path = GoogleLocations;
 			sourceTree = "<group>";
@@ -149,6 +173,7 @@
 		4E184067148E5B1A0066556A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4E9CE13914A22E2F007BDDAC /* Images */,
 				4E184068148E5B1A0066556A /* GoogleLocations-Info.plist */,
 				4E184069148E5B1A0066556A /* InfoPlist.strings */,
 				4E18406C148E5B1A0066556A /* main.m */,
@@ -211,6 +236,28 @@
 			path = SBJSON;
 			sourceTree = "<group>";
 		};
+		4E9CE13114A22DF4007BDDAC /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				4E9CE13314A22E09007BDDAC /* PullToRefreshTableViewController.h */,
+				4E9CE13414A22E09007BDDAC /* PullToRefreshTableViewController.m */,
+				4E9CE13514A22E09007BDDAC /* EGORefreshTableHeaderView.h */,
+				4E9CE13614A22E09007BDDAC /* EGORefreshTableHeaderView.m */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		4E9CE13914A22E2F007BDDAC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4E9CE13A14A22E3F007BDDAC /* blackArrow.png */,
+				4E9CE13B14A22E3F007BDDAC /* blueArrow_new.png */,
+				4E9CE13C14A22E3F007BDDAC /* blueArrow.png */,
+				4E9CE13D14A22E3F007BDDAC /* whiteArrow.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -263,6 +310,10 @@
 			files = (
 				4E18406B148E5B1A0066556A /* InfoPlist.strings in Resources */,
 				4E184074148E5B1A0066556A /* MainStoryboard.storyboard in Resources */,
+				4E9CE13E14A22E3F007BDDAC /* blackArrow.png in Resources */,
+				4E9CE13F14A22E3F007BDDAC /* blueArrow_new.png in Resources */,
+				4E9CE14014A22E3F007BDDAC /* blueArrow.png in Resources */,
+				4E9CE14114A22E3F007BDDAC /* whiteArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +342,9 @@
 				4E1840AE148E5C120066556A /* SBJsonTokeniser.m in Sources */,
 				4E1840AF148E5C120066556A /* SBJsonUTF8Stream.m in Sources */,
 				4E1840B0148E5C120066556A /* SBJsonWriter.m in Sources */,
+				4E9CE13714A22E09007BDDAC /* PullToRefreshTableViewController.m in Sources */,
+				4E9CE13814A22E09007BDDAC /* EGORefreshTableHeaderView.m in Sources */,
+				4E9CE14614A23013007BDDAC /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +456,7 @@
 				4E18407C148E5B1A0066556A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
