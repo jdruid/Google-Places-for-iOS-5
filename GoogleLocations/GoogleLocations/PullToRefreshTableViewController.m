@@ -23,8 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 41.0)];
     searchBar.delegate = self;
+    
+    //Do not need to add search bar since it is added in Storyboard
+    //searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 41.0)];
     //[searchBar setBackgroundColor:[UIColor colorWithRed:232.0/255 green:244.0/255 blue:254.0/255 alpha:1]];
     //[searchBar setTintColor:[UIColor colorWithRed:232.0/255 green:244.0/255 blue:254.0/255 alpha:1]];
     //[self.view addSubview:searchBar];
