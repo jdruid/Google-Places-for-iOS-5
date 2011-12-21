@@ -41,37 +41,7 @@
 	NSLog(@"need a delegate!! use initWithDelegate!");
 	return nil;
 }
-
--(void)getGoogleObjectsWithQuery:(NSString *)query 
-                  andCoordinates:(CLLocationCoordinate2D)coords 
-                        andTypes:(NSString *)types
-{
-	double centerLat = coords.latitude;
-	double centerLng = coords.longitude;
-
-    query = [query gtm_stringByEscapingForURLArgument];
-    types = [types gtm_stringByEscapingForURLArgument];
-    
-    NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=1000&types=%@&name=%@&sensor=true&key=%@",
-                                   centerLat, centerLng, types, query, kGOOGLE_API_KEY];
-
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy 
-                                                       timeoutInterval:10];
-
-	[self cancelGetGoogleObjects];
-	
-	connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
-
-	if (connection) 
-    {
-		responseData = [NSMutableData data];
-		connectionIsActive = YES;
-	} else {
-        NSLog(@"connection failed");
-	}
-}
-
+//Method is called to load initial search
 -(void)getGoogleObjects:(CLLocationCoordinate2D)coords andTypes:(NSString *)types
 {	
     
@@ -101,12 +71,66 @@
 	}
     
 }
+//Method is called during UISearchBar search
+-(void)getGoogleObjectsWithQuery:(NSString *)query 
+                  andCoordinates:(CLLocationCoordinate2D)coords 
+                        andTypes:(NSString *)types
+{
+	double centerLat = coords.latitude;
+	double centerLng = coords.longitude;
+    
+    query = [query gtm_stringByEscapingForURLArgument];
+    types = [types gtm_stringByEscapingForURLArgument];
+    
+    NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=1000&types=%@&name=%@&sensor=true&key=%@",
+                                    centerLat, centerLng, types, query, kGOOGLE_API_KEY];
+    
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy 
+                                                       timeoutInterval:10];
+    
+	[self cancelGetGoogleObjects];
+	
+	connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+	if (connection) 
+    {
+		responseData = [NSMutableData data];
+		connectionIsActive = YES;
+	} else {
+        NSLog(@"connection failed");
+	}
+}
+//Method is called to get details of place
+-(void)getGoogleObjectDetails:(NSString *)reference
+{	
+        
+    NSString* gurl  = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=%@",
+                       reference, kGOOGLE_API_KEY];
+    
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy 
+                                                       timeoutInterval:10];
+    
+	[self cancelGetGoogleObjects];
+	
+	connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+	if (connection) 
+    {
+		responseData = [NSMutableData data];
+		connectionIsActive = YES;
+	}		
+	else {
+        NSLog(@"connection failed");
+	}
+    
+}
 
 - (void)connection:(NSURLConnection *)conn didReceiveResponse:(NSURLResponse *)response 
 {
 	[responseData setLength:0];
 }
-
 
 - (void)connection:(NSURLConnection *)conn didReceiveData:(NSData *)data 
 {
@@ -136,21 +160,36 @@
     
         if ([responseStatus isEqualToString:@"OK"]) 
         {
-            NSDictionary *gResponseData         = [parsedJSON objectForKey: @"results"];
-            NSMutableArray *googlePlacesObjects = [NSMutableArray arrayWithCapacity:[[parsedJSON objectForKey:@"results"] count]]; 
-            
-            for (NSDictionary *result in gResponseData) 
-            {
-                [googlePlacesObjects addObject:result];
-            }
-            
-            for (int x=0; x<[googlePlacesObjects count]; x++) 
-            {                
-                GooglePlacesObject *object = [[GooglePlacesObject alloc] initWithJsonResultDict:[googlePlacesObjects objectAtIndex:x]];
-                [googlePlacesObjects replaceObjectAtIndex:x withObject:object];
-            }
+            if ([parsedJSON objectForKey: @"results"] == nil) {
+                //Perform Place Details results
+                NSDictionary *gResponseDetailData = [parsedJSON objectForKey: @"result"];
+                NSMutableArray *googlePlacesDetailObject = [NSMutableArray arrayWithCapacity:1];  //Hard code since ONLY 1 result will be coming back
+                
+                GooglePlacesObject *detailObject = [[GooglePlacesObject alloc] initWithJsonResultDict:gResponseDetailData];
+                [googlePlacesDetailObject addObject:detailObject];
+                
+                [delegate googlePlacesConnection:self didFinishLoadingWithGooglePlacesObjects:googlePlacesDetailObject];
+                
+            } else {
+                //Perform Place Search results
+                NSDictionary *gResponseData  = [parsedJSON objectForKey: @"results"];
+                NSMutableArray *googlePlacesObjects = [NSMutableArray arrayWithCapacity:[[parsedJSON objectForKey:@"results"] count]]; 
 
-            [delegate googlePlacesConnection:self didFinishLoadingWithGooglePlacesObjects:googlePlacesObjects];
+                for (NSDictionary *result in gResponseData) 
+                {
+                    [googlePlacesObjects addObject:result];
+                }
+                
+                for (int x=0; x<[googlePlacesObjects count]; x++) 
+                {                
+                    GooglePlacesObject *object = [[GooglePlacesObject alloc] initWithJsonResultDict:[googlePlacesObjects objectAtIndex:x]];
+                    [googlePlacesObjects replaceObjectAtIndex:x withObject:object];
+                }
+                
+                [delegate googlePlacesConnection:self didFinishLoadingWithGooglePlacesObjects:googlePlacesObjects];
+                
+            }
+                        
         }
         else if ([responseStatus isEqualToString:@"ZERO_RESULTS"]) 
         {

@@ -45,6 +45,8 @@
 -(void)getGoogleObjects:(CLLocationCoordinate2D)coords 
                andTypes:(NSString *)types;
 
+-(void)getGoogleObjectDetails:(NSString*)reference;
+
 -(void)cancelGetGoogleObjects;
 
 @end

@@ -129,9 +129,11 @@
     NSString    *url;
     NSArray     *addressComponents; //array
     NSString    *formattedAddress;
-    NSString    *formattedPhoneNumber;
-    CLLocationCoordinate2D coordinate;
+    NSString    *formattedPhoneNumber; 
+    NSString    *website;
+    NSString    *internationalPhoneNumber;
     NSString    *searchTerms;
+    CLLocationCoordinate2D coordinate;
     
 }
 
@@ -146,8 +148,10 @@
 @property (nonatomic, retain) NSArray     *addressComponents; //array
 @property (nonatomic, retain) NSString    *formattedAddress;
 @property (nonatomic, retain) NSString    *formattedPhoneNumber;
-@property (nonatomic, assign) CLLocationCoordinate2D    coordinate;
+@property (nonatomic, retain) NSString    *website;
+@property (nonatomic, retain) NSString    *internationalPhoneNumber;
 @property (nonatomic, retain) NSString      *searchTerms;
+@property (nonatomic, assign) CLLocationCoordinate2D    coordinate;
 
 - (id)initWithJsonResultDict:(NSDictionary *)jsonResultDict;
 - (id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms;
@@ -164,6 +168,8 @@
  addressComponents:(NSString *)addComp 
   formattedAddress:(NSArray *)fAddrss
 formattedPhoneNumber:(NSString *)fPhone
+           website:(NSString *)web
+internationalPhone:(NSString *)intPhone
        searchTerms:(NSString *)search;
 
 

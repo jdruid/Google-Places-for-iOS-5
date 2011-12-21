@@ -30,6 +30,8 @@
 @synthesize addressComponents;
 @synthesize formattedAddress;
 @synthesize formattedPhoneNumber;
+@synthesize website;
+@synthesize internationalPhoneNumber;
 @synthesize coordinate;
 @synthesize searchTerms;
 
@@ -45,6 +47,8 @@
 addressComponents:(NSArray *)addComp 
  formattedAddress:(NSString *)fAddrss 
 formattedPhoneNumber:(NSString *)fPhone
+website:(NSString *)web 
+internationalPhone:(NSString *)intPhone
       searchTerms:(NSString *)search
 {
     
@@ -60,7 +64,8 @@ formattedPhoneNumber:(NSString *)fPhone
         [self setAddressComponents:addComp];
         [self setFormattedAddress:fAddrss];
         [self setFormattedPhoneNumber:fPhone];
-        
+        [self setWebsite:web];
+        [self setInternationalPhoneNumber:intPhone];
         [self setSearchTerms:search];
         
         [self setCoordinate:CLLocationCoordinate2DMake(lt, lg)];
@@ -87,6 +92,8 @@ formattedPhoneNumber:(NSString *)fPhone
      addressComponents:[jsonResultDict objectForKey:@"address_components"]
       formattedAddress:[jsonResultDict objectForKey:@"formatted_address"]
   formattedPhoneNumber:[jsonResultDict objectForKey:@"formatted_phone_number"]
+            website:[jsonResultDict objectForKey:@"website"]
+           internationalPhone:[jsonResultDict objectForKey:@"international_phone_number"] 
      searchTerms:[jsonResultDict objectForKey:terms]];
 
 }
