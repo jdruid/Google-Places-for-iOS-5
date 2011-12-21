@@ -135,8 +135,6 @@ static NSDateFormatter *refreshFormatter;
 
 - (void)setCurrentDate {
 	lastUpdatedLabel.text = [NSString stringWithFormat:@"Last Updated: %@", [refreshFormatter stringFromDate:[NSDate date]]];
-//	[[NSUserDefaults standardUserDefaults] setObject:lastUpdatedLabel.text forKey:@"EGORefreshTableView_LastRefresh"];
-//	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setState:(EGOPullRefreshState)aState{
