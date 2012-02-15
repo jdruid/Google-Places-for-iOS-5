@@ -1,0 +1,70 @@
+=====================================================================
+CHANGE FILE
+=====================================================================
+
+GooglePlacesConnection.h
+ - Added new property called userLocation
+
+GooglePlacesConnection.m
+- Synthesized the property called userLocation
+- in method getGoogleObjects set userLocation to coords parameter
+- in method getGoogleObjectsWithQuery set userLocation to coords parameter
+- in method connectionDidFinishLoading updated the following new method calls
+	- in the parsedJSON if statement, the first clause
+		- GooglePlacesObject *detailObject = [[GooglePlacesObject alloc] initWithJsonResultDict:gResponseDetailData andUserCoordinates:userLocation];
+	- in the second clause 
+		- GooglePlacesObject *object = [[GooglePlacesObject alloc] initWithJsonResultDict:[googlePlacesObjects objectAtIndex:x] andUserCoordinates:userLocation];
+
+GooglePlacesObject.h
+- Added new property called distanceInFeetString
+- Added new property called distanceInMilesString
+- Changed method definition 
+	- - (id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms andUserCoordinates:(CLLocationCoordinate2D)userCoords;
+- Changed method definition
+	- - (id)initWithName:(NSString *)name
+          latitude:(double)lt 
+         longitude:(double)lg 
+         placeIcon:(NSString *)icn               
+            rating:(NSString *)rate            
+          vicinity:(NSString *)vic       
+              type:(NSString *)typ 
+         reference:(NSString *)ref 
+               url:(NSString *)www
+ addressComponents:(NSString *)addComp 
+  formattedAddress:(NSArray *)fAddrss
+formattedPhoneNumber:(NSString *)fPhone
+           website:(NSString *)web
+internationalPhone:(NSString *)intPhone
+       searchTerms:(NSString *)search
+    distanceInFeet:(NSString *)distanceFeet
+   distanceInMiles:(NSString *)distanceMiles;
+   
+GooglePlacesObject.m
+- Synthesize property distanceInFeetString
+- Synthesize property distanceInMilesString
+- changed method initWithName
+	- add the coords as params
+	- set new properties within method
+- changed method initWithJsonResultDict
+	- add the 2 new properties as params
+	- get the distances and calculate and set
+	- set method call with new properties
+- changed method initWithJsonResultDict
+	- add coords as param
+	
+ViewController.h
+- added property called locationsFilterResults
+- added method definiton buildSearchArrayFrom
+
+ViewController.m
+- synthesized locationFilterResults property
+- changed method searchBarTextDidBeginEditing
+ - switch allowsSelection and scrollEnabled to YES
+- added searchBar method for filtering
+- added buildSearchArrayFrom method for filtering
+- in tableView numberOfRowsInSection change count to locationsFilterResult
+- in tableView cellForRowAtIndexPath switch locations array to locationsFilterResult
+	- added distance to text
+- in prepareForSegue switched locations for locationsFilterResults
+- in googlePlacesConnection didFinishLoadingWithGooglePlacesObjects added locationsFilterResults set to objects
+	
