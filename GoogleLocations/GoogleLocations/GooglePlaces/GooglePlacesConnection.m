@@ -25,6 +25,8 @@
 @synthesize connection;
 @synthesize connectionIsActive;
 @synthesize minAccuracyValue;
+//NEW
+@synthesize userLocation;
 
 - (id)initWithDelegate:(id <GooglePlacesConnectionDelegate>)del
 {
@@ -41,9 +43,13 @@
 	NSLog(@"need a delegate!! use initWithDelegate!");
 	return nil;
 }
+
+
 //Method is called to load initial search
 -(void)getGoogleObjects:(CLLocationCoordinate2D)coords andTypes:(NSString *)types
 {	
+    //NEW setting userlocation to the coords passed in for later use
+    userLocation = coords;
     
     double centerLat = coords.latitude;
 	double centerLng = coords.longitude;
@@ -76,6 +82,10 @@
                   andCoordinates:(CLLocationCoordinate2D)coords 
                         andTypes:(NSString *)types
 {
+    
+    //NEW setting userlocation to the coords passed in for later use
+    userLocation = coords;
+
 	double centerLat = coords.latitude;
 	double centerLng = coords.longitude;
     
@@ -165,7 +175,7 @@
                 NSDictionary *gResponseDetailData = [parsedJSON objectForKey: @"result"];
                 NSMutableArray *googlePlacesDetailObject = [NSMutableArray arrayWithCapacity:1];  //Hard code since ONLY 1 result will be coming back
                 
-                GooglePlacesObject *detailObject = [[GooglePlacesObject alloc] initWithJsonResultDict:gResponseDetailData];
+                GooglePlacesObject *detailObject = [[GooglePlacesObject alloc] initWithJsonResultDict:gResponseDetailData andUserCoordinates:userLocation];
                 [googlePlacesDetailObject addObject:detailObject];
                 
                 [delegate googlePlacesConnection:self didFinishLoadingWithGooglePlacesObjects:googlePlacesDetailObject];
@@ -182,7 +192,7 @@
                 
                 for (int x=0; x<[googlePlacesObjects count]; x++) 
                 {                
-                    GooglePlacesObject *object = [[GooglePlacesObject alloc] initWithJsonResultDict:[googlePlacesObjects objectAtIndex:x]];
+                    GooglePlacesObject *object = [[GooglePlacesObject alloc] initWithJsonResultDict:[googlePlacesObjects objectAtIndex:x] andUserCoordinates:userLocation];
                     [googlePlacesObjects replaceObjectAtIndex:x withObject:object];
                 }
                 

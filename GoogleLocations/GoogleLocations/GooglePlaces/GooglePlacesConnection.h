@@ -27,6 +27,8 @@
     NSURLConnection     *connection;
     BOOL                connectionIsActive;
     int                 minAccuracyValue;
+    //NEW
+    CLLocationCoordinate2D userLocation;
 }
 
 @property (nonatomic, weak) id <GooglePlacesConnectionDelegate> delegate;
@@ -34,6 +36,8 @@
 @property (nonatomic, retain) NSURLConnection   *connection;
 @property (nonatomic, assign) BOOL              connectionIsActive;
 @property (nonatomic, assign) int               minAccuracyValue;
+//NEW
+@property (nonatomic, assign) CLLocationCoordinate2D userLocation;
 
 // useful functions
 -(id)initWithDelegate:(id)del;

@@ -115,7 +115,7 @@
 #define	kVeterinaryCare	@"veterinary_care"
 #define	kZoo	@"zoo"
 
-#define kGOOGLE_API_KEY @"YOUR_API_KEY"
+#define kGOOGLE_API_KEY @"API KEY"
 
 @interface GooglePlacesObject : NSObject
 {
@@ -134,6 +134,9 @@
     NSString    *internationalPhoneNumber;
     NSString    *searchTerms;
     CLLocationCoordinate2D coordinate;
+    //NEW
+    NSString    *distanceInFeetString;
+    NSString    *distanceInMilesString;
     
 }
 
@@ -152,9 +155,12 @@
 @property (nonatomic, retain) NSString    *internationalPhoneNumber;
 @property (nonatomic, retain) NSString      *searchTerms;
 @property (nonatomic, assign) CLLocationCoordinate2D    coordinate;
+//NEW
+@property (nonatomic, retain) NSString    *distanceInFeetString;
+@property (nonatomic, retain) NSString    *distanceInMilesString;
 
-- (id)initWithJsonResultDict:(NSDictionary *)jsonResultDict;
-- (id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms;
+- (id)initWithJsonResultDict:(NSDictionary *)jsonResultDict andUserCoordinates:(CLLocationCoordinate2D)userCoords;
+- (id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms andUserCoordinates:(CLLocationCoordinate2D)userCoords;
 
 - (id)initWithName:(NSString *)name
           latitude:(double)lt 
@@ -170,7 +176,9 @@
 formattedPhoneNumber:(NSString *)fPhone
            website:(NSString *)web
 internationalPhone:(NSString *)intPhone
-       searchTerms:(NSString *)search;
+       searchTerms:(NSString *)search
+    distanceInFeet:(NSString *)distanceFeet
+   distanceInMiles:(NSString *)distanceMiles;
 
 
 

@@ -33,6 +33,9 @@
 @synthesize website;
 @synthesize internationalPhoneNumber;
 @synthesize coordinate;
+//NEW
+@synthesize distanceInFeetString;
+@synthesize distanceInMilesString;
 @synthesize searchTerms;
 
 -(id)initWithName:(NSString *)theName 
@@ -50,6 +53,8 @@ formattedPhoneNumber:(NSString *)fPhone
 website:(NSString *)web 
 internationalPhone:(NSString *)intPhone
       searchTerms:(NSString *)search
+distanceInFeet:(NSString *)distanceFeet 
+  distanceInMiles:(NSString *)distanceMiles
 {
     
     if (self = [super init])
@@ -69,17 +74,34 @@ internationalPhone:(NSString *)intPhone
         [self setSearchTerms:search];
         
         [self setCoordinate:CLLocationCoordinate2DMake(lt, lg)];
+        
+        [self setDistanceInFeetString:distanceFeet];
+        [self setDistanceInMilesString:distanceMiles];
+        
     }
     return self;
     
 }
 
--(id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms
+//UPDATED
+-(id)initWithJsonResultDict:(NSDictionary *)jsonResultDict searchTerms:(NSString *)terms andUserCoordinates:(CLLocationCoordinate2D)userCoords
 {
     
     NSDictionary *geo = [jsonResultDict objectForKey:@"geometry"];
     NSDictionary *loc = [geo objectForKey:@"location"];
     
+    //Figure out Distance from POI and User
+    CLLocation *poi = [[CLLocation alloc] initWithLatitude:[[loc objectForKey:@"lat"] doubleValue]  longitude:[[loc objectForKey:@"lng"] doubleValue]];
+    CLLocation *user = [[CLLocation alloc] initWithLatitude:userCoords.latitude longitude:userCoords.longitude];
+    CLLocationDistance inFeet = ([user distanceFromLocation:poi]) * 3.2808;
+    
+    CLLocationDistance inMiles = ([user distanceFromLocation:poi]) * 0.000621371192;
+    
+    NSString *distanceInFeet = [NSString stringWithFormat:@"%.f", round(2.0f * inFeet) / 2.0f];
+    NSString *distanceInMiles = [NSString stringWithFormat:@"%.2f", inMiles];
+    
+    //NSLog(@"Total Distance %@ in feet, distance in files %@",distanceInFeet, distanceInMiles);
+        
 	return [self initWithName:[jsonResultDict objectForKey:@"name"] 
               latitude:[[loc objectForKey:@"lat"] doubleValue] 
              longitude:[[loc objectForKey:@"lng"] doubleValue]
@@ -94,13 +116,17 @@ internationalPhone:(NSString *)intPhone
   formattedPhoneNumber:[jsonResultDict objectForKey:@"formatted_phone_number"]
             website:[jsonResultDict objectForKey:@"website"]
            internationalPhone:[jsonResultDict objectForKey:@"international_phone_number"] 
-     searchTerms:[jsonResultDict objectForKey:terms]];
+     searchTerms:[jsonResultDict objectForKey:terms]
+               distanceInFeet:distanceInFeet
+distanceInMiles:distanceInMiles     
+            ];
 
 }
 
--(id) initWithJsonResultDict:(NSDictionary *)jsonResultDict
+//Updated
+-(id) initWithJsonResultDict:(NSDictionary *)jsonResultDict andUserCoordinates:(CLLocationCoordinate2D)userCoords
 {
-    return [self initWithJsonResultDict:jsonResultDict searchTerms:@""];
+    return [self initWithJsonResultDict:jsonResultDict searchTerms:@"" andUserCoordinates:userCoords];
 
 }
 @end
