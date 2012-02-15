@@ -30,6 +30,8 @@
 @synthesize urlConnection;
 @synthesize responseData;
 @synthesize locations;
+//NEW - to handle filtering
+@synthesize locationsFilterResults;
 
 - (void)didReceiveMemoryWarning
 {
@@ -117,16 +119,20 @@
                                  ];
     
     
-    [googlePlacesConnection getGoogleObjectsWithQuery:searchString andCoordinates:CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude) andTypes:searchLocations];
+    [googlePlacesConnection getGoogleObjectsWithQuery:searchString 
+                                       andCoordinates:CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude) 
+                                             andTypes:searchLocations];
     
     [tableView reloadData];
 }
 
+//UPDATE - to handle filtering
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar
 {
     [theSearchBar setShowsCancelButton:YES animated:YES];
-    tableView.allowsSelection   = NO;
-    tableView.scrollEnabled     = NO;    
+    //Changed to YES to allow selection when in the middle of a search/filter
+    tableView.allowsSelection   = YES;
+    tableView.scrollEnabled     = YES;    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)theSearchBar
@@ -146,6 +152,44 @@
     tableView.scrollEnabled     = YES;
     
     [self updateSearchString:theSearchBar.text];
+}
+
+//NEW - to handle filtering
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self buildSearchArrayFrom:searchText];
+}
+
+//NEW - to handle filtering
+//Create an array by applying the search string
+- (void) buildSearchArrayFrom: (NSString *) matchString
+{
+	NSString *upString = [matchString uppercaseString];
+	
+	locationsFilterResults = [[NSMutableArray alloc] init];
+    
+	for (GooglePlacesObject *location in locations)
+	{
+		if ([matchString length] == 0)
+		{
+			[locationsFilterResults addObject:location];
+			continue;
+		}
+		
+		NSRange range = [[location.name uppercaseString] rangeOfString:upString];
+		
+        if (range.location != NSNotFound) 
+        {
+            NSLog(@"Hit");
+            
+            NSLog(@"Location Name %@", location.name);
+            NSLog(@"Search String %@", upString);
+            
+            [locationsFilterResults addObject:location];
+        }
+	}
+	
+	[tableView reloadData];
 }
 
 #pragma mark -
@@ -172,11 +216,14 @@
     return 1;
 }
 
+//UPDATE - to handle filtering
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section
 {
-    return [locations count];
+    //return [locations count];
+    return [locationsFilterResults count];
 }
 
+//UPDATE - to handle filtering
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	static NSString *CellIdentifier = @"LocationCell";
@@ -190,7 +237,9 @@
     
     // Get the object to display and set the value in the cell.    
     GooglePlacesObject *place     = [[GooglePlacesObject alloc] init];
-    place                       = [locations objectAtIndex:[indexPath row]];
+    
+    //UPDATED from locations to locationFilter results
+    place                       = [locationsFilterResults objectAtIndex:[indexPath row]];
     
     cell.textLabel.text                         = place.name;
     cell.textLabel.adjustsFontSizeToFitWidth    = YES;
@@ -201,19 +250,24 @@
     cell.textLabel.textColor                    = [UIColor colorWithRed:0.0 green:128.0/255.0 blue:0.0 alpha:1.0];
     cell.textLabel.textAlignment                = UITextAlignmentLeft;
     
-    cell.detailTextLabel.text                   = place.vicinity;
+    //You can use place.distanceInMilesString or place.distanceInFeetString.  
+    //You can add logic that if distanceInMilesString starts with a 0. then use Feet otherwise use Miles.
+    cell.detailTextLabel.text                   = [NSString stringWithFormat:@"%@ - Distance %@ miles", place.vicinity, place.distanceInMilesString];
     cell.detailTextLabel.textColor              = [UIColor darkGrayColor];
     cell.detailTextLabel.font                   = [UIFont systemFontOfSize:10.0];
 
     return cell;
 }
 
+//UPDATE - to handle filtering
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"ShowPlaceDetail"]) 
     {        
         NSIndexPath *selectedRowIndex = [self.tableView indexPathForSelectedRow];
-        GooglePlacesObject *places = [locations objectAtIndex:selectedRowIndex.row];
+        
+        //UPDATED from locations to locationFilterResults
+        GooglePlacesObject *places = [locationsFilterResults objectAtIndex:selectedRowIndex.row];
         
         DetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.reference =  places.reference;     
@@ -275,7 +329,8 @@
                                  kNightClub
                                  ];
     
-    [googlePlacesConnection getGoogleObjects:CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude) andTypes:searchLocations];
+    [googlePlacesConnection getGoogleObjects:CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude) 
+                                    andTypes:searchLocations];
     
 }
 
@@ -289,6 +344,7 @@
 #pragma mark -
 #pragma mark NSURLConnections
 
+//UPDATE - to handle filtering
 - (void)googlePlacesConnection:(GooglePlacesConnection *)conn didFinishLoadingWithGooglePlacesObjects:(NSMutableArray *)objects 
 {
     
@@ -301,6 +357,8 @@
         [alert show];
     } else {
         locations = objects;
+        //UPDATED locationFilterResults for filtering later on
+        locationsFilterResults = objects;
         [tableView reloadData];
     }
 }

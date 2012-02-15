@@ -29,6 +29,7 @@
     
     NSMutableData           *responseData;
     NSMutableArray          *locations;
+    NSMutableArray          *locationsFilterResults;
     NSString                *searchString;
     
     GooglePlacesConnection  *googlePlacesConnection;
@@ -43,5 +44,8 @@
 @property (nonatomic, retain) NSURLConnection   *urlConnection;
 @property (nonatomic, retain) NSMutableData     *responseData;
 @property (nonatomic, retain) NSMutableArray    *locations;
+@property (nonatomic, retain) NSMutableArray    *locationsFilterResults;
+
+-(void)buildSearchArrayFrom:(NSString *)matchString;
 
 @end
