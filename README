@@ -4,15 +4,46 @@ This library utilizes the Google Places API(http://code.google.com/apis/maps/doc
 
 It has been derived from the following repository (https://github.com/vvanhee/Google-Local-Search-iOS)
 
-# Summary
+
+## Installation
 
 Application will determine location.  Issue Google Places API request containing the LAT and LNG and TYPES (types are configurable) and will return JSON results into an object to display in UITableView.
 
 UISearchBar is also configured to issue free text search.
 
-A more detailed tutorial is at my site -> http://drew5.net/2011/11/28/google-places-for-ios-5-sdk/
 
-# Usage
+## Usage
+
+A more detailed tutorial is at my site -> http://drew5.net/apps/google-places-for-ios-5-sdk/
+
 Add CoreLocation and MapKit Frameworks.
 Add Google classes
 Have a blast.
+
+## History
+
+None at this time
+
+## Credits
+
+Joshua Drew
+Sr Technical Evangelist - Microsoft
+@jdruid
+Drew5.net
+
+## License
+
+Apache License 
+
+Version 2.0, January 2004 
+
+http://www.apache.org/licenses
+
+## DISCLAIMER:
+
+The sample code described herein is provided on an "as is" basis, without warranty of any kind, to the fullest extent permitted by law. Both Microsoft and I do not warrant or guarantee the individual success developers may have in implementing the sample code on their development platforms or in using their own Web server configurations. 
+
+Microsoft and I do not warrant, guarantee or make any representations regarding the use, results of use, accuracy, timeliness or completeness of any data or information relating to the sample code. Microsoft and I disclaim all warranties, express or implied, and in particular, disclaims all warranties of merchantability, fitness for a particular purpose, and warranties related to the code, or any service or software related thereto. 
+
+Microsoft and I shall not be liable for any direct, indirect or consequential damages or costs of any type arising out of any action taken by you or others related to the sample code.
+
