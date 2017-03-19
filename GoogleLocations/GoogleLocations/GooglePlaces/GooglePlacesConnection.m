@@ -94,8 +94,9 @@
     
     NSString* gurl               = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=1000&types=%@&name=%@&sensor=true&key=%@",
                                     centerLat, centerLng, types, query, kGOOGLE_API_KEY];
+    NSString *escapedGurl = [gurl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:gurl] 
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:escapedGurl]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy 
                                                        timeoutInterval:10];
     
